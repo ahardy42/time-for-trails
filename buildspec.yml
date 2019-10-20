@@ -1,0 +1,20 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 8
+    commands:
+      - npm install && npm run install
+      - cd ..
+  build:
+    commands:
+      - npm run build
+      - cd ..
+  post_build:
+    commands:
+      - npm run start
+
+artifacts:
+  files:
+    - '**/*'
