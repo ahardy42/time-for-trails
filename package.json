@@ -1,0 +1,26 @@
+{
+  "name": "time-to-train",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
+    "start:prod": "node server.js",
+    "start:dev": "concurrently \"nodemon ./bin/www --ignore 'client/*'\" \"npm run client\"",
+    "client": "cd client && npm run start",
+    "install": "cd client && npm install",
+    "build": "cd client && npm run build"
+  },
+  "dependencies": {
+    "axios": "^0.19.0",
+    "cookie-parser": "~1.4.4",
+    "debug": "~2.6.9",
+    "dotenv": "^8.1.0",
+    "express": "~4.16.1",
+    "if-env": "^1.0.4",
+    "morgan": "~1.9.1",
+    "robust-point-in-polygon": "^1.0.3"
+  },
+  "devDependencies": {
+    "concurrently": "^5.0.0"
+  }
+}
