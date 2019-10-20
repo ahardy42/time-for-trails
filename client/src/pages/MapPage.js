@@ -2,7 +2,6 @@ import React from 'react';
 import NavBar from '../components/NavBar';
 import MapWrapper from '../containers/MapWrapper';
 import Footer from '../components/Footer';
-import LocationContext from '../context/LocationContext';
 import ChoicesContext from '../context/ChoicesContext';
 
 const MapPage = ({history}) => {
@@ -10,7 +9,7 @@ const MapPage = ({history}) => {
         <>
             <NavBar />
             <ChoicesContext.Consumer>
-                {({choices}) => <MapWrapper choices={choices} history={history} />}
+                {({choices}) => "mode" in choices ? <MapWrapper choices={choices} history={history} /> : history.push("/")}
             </ChoicesContext.Consumer>
             <Footer />
         </>
