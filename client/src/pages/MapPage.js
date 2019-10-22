@@ -7,9 +7,9 @@ import ChoicesContext from '../context/ChoicesContext';
 const MapPage = ({history}) => {
     return(
         <>
-            <NavBar />
+            <NavBar history={history} />
             <ChoicesContext.Consumer>
-                {({choices}) => "mode" in choices ? <MapWrapper choices={choices} history={history} /> : history.push("/")}
+                {({choices, setChoices}) => "mode" in choices ? <MapWrapper setChoices={setChoices} choices={choices} history={history} /> : history.push("/")}
             </ChoicesContext.Consumer>
             <Footer />
         </>

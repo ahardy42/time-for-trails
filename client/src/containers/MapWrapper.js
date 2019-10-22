@@ -33,7 +33,7 @@ class MapWrapper extends React.Component {
     }
     render() {
         return (
-            <MapComponent trailsInfo={this.state.trailsInfo} />
+            <MapComponent setChoices={this.props.setChoices} trailsInfo={this.state.trailsInfo} />
         );
     }
 }
