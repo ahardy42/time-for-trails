@@ -7,7 +7,7 @@ import ChoicesContext from '../context/ChoicesContext';
 const EntryPage = ({history}) => {
     return (
         <>
-            <NavBar />
+            <NavBar history={history}/>
             <ChoicesContext.Consumer>
                 {({ setChoices }) => <FormWrapper setChoices={setChoices} history={history}/>}
             </ChoicesContext.Consumer>
