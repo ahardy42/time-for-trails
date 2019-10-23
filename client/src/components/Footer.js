@@ -15,6 +15,7 @@ const useStyles = makeStyles({
         height: "10vh"
     },
     appBarFooter: {
+        position: "fixed",
         bottom: 0,
         display: "flex",
         flexDirection: "row",
@@ -30,7 +31,7 @@ const Footer = props => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="sticky" className={classes.appBarFooter}>
+            <AppBar position="relative" className={classes.appBarFooter}>
                 <Typography className={classes.Typography} variant="h6">Andy Hardy | <Link color="inherit" href="https://www.ahardy42.com" target="_blank">Portfolio</Link></Typography>
             </AppBar>
         </div>
