@@ -8,7 +8,6 @@ class LocateControl extends MapControl {
       leaflet: { map },
       options
     } = props;
-    console.log(options);
     const lc = L.control.locate(options).addTo(map);
     return lc;
   }

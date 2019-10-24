@@ -41,6 +41,21 @@ const MapComponent = ({ trailsInfo, setChoices }) => {
 
     const classes = useStyles();
 
+    const renderPopup = ({name, imgSmall, url, summary}) => {
+        return (
+            <Popup options={{autoPan: true}}>
+                <div className="popup-content">
+                    <h3>{name}</h3>
+                    <p>{summary}</p>
+                    <br/>
+                    <img src={imgSmall} alt='trail image'/>
+                    <br/>
+                    <a href={url} target='_blank'>here's some more info...</a>
+                </div>
+            </Popup>
+        )
+    }
+
     return (
         <Grid container justify="center" alignContent="center" className={classes.root}>
             <Paper elevation={2} className={classes.Paper}>
@@ -58,7 +73,7 @@ const MapComponent = ({ trailsInfo, setChoices }) => {
                         <Overlay name="trails" checked={true}>
                             <LayerGroup>
                                 {/* mapping the trails markers */}
-                                {trailsInfo.trails.map((trail, index) => <Marker key={index} position={[trail.latitude, trail.longitude]}><Popup>{trail.name}<br></br><a href={trail.url} target="_blank">link to trail</a></Popup></Marker>)}
+                                {trailsInfo.trails.map((trail, index) => <Marker key={index} position={[trail.latitude, trail.longitude]}>{renderPopup(trail)}</Marker>)}
                             </LayerGroup>
                         </Overlay>
                     </LayersControl>
