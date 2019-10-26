@@ -12,20 +12,24 @@ class FormWrapper extends React.Component {
             travelType: "",
             timeLimit: 0,
             errorMessage: "",
+            isDisabled: true
         }
     }
     handleChange = event => {
         // handler for travel type selector, and time limit input
         const { name, value } = event.target;
-        this.setState({
-            [name]: value
-        });
-    }
-    handleCheck = event => {
-        // handler for clicking the mode radio button
-        const { value } = event.target;
-        this.setState({
-            mode: value
+        this.setState(prevState => {
+            let {mode, travelType, timeLimit} = prevState;
+            const returnDisabled = (mode, travelType, timeLimit) => {
+                if (mode !== "" && travelType !== "" && parseInt(timeLimit) !== "") {
+                    return false;
+                }
+                return true;
+            }
+            return {
+                [name]: value,
+                isDisabled: returnDisabled(mode, travelType, timeLimit)
+            }
         });
     }
     handleSubmit = async event => {
@@ -44,9 +48,9 @@ class FormWrapper extends React.Component {
                 travelType={this.state.travelType}
                 timeLimit={this.state.timeLimit}
                 errorMessage={this.state.errorMessage}
-                handleCheck={this.handleCheck}
                 handleChange={this.handleChange}
                 handleSubmit={this.handleSubmit}
+                isDisabled={this.state.isDisabled}
             />
         );
     }

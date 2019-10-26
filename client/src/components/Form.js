@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 import { FormControl, InputLabel, Select, Button, RadioGroup, FormControlLabel, Radio, TextField, Paper, Typography, Container, Grid, FormLabel} from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 
@@ -36,18 +36,8 @@ const useStyles = makeStyles({
     }
 })
 
-const Form = ({mode, travelType, timeLimit, errorMessage, handleChange, handleCheck, handleSubmit}) => {
+const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabled}) => {
     const classes = useStyles();
-    const [isDisabled, setIsdisabled] = useState(true);
-
-    // form submission validation
-    useEffect(() => {
-        if (mode !== "" && travelType !== "" && parseInt(timeLimit) > 0) {
-            setIsdisabled(false);
-        } else {
-            setIsdisabled(true);
-        }
-    }, [mode, travelType, timeLimit]);
 
     return(
         <Container maxWidth="lg" className={classes.root}>
@@ -64,7 +54,7 @@ const Form = ({mode, travelType, timeLimit, errorMessage, handleChange, handleCh
                 <Paper elevation={2} className={classes.Paper}>
                     <FormControl component="fieldset" className={classes.formControl}>
                         <FormLabel component="legend">What Type of Trail are you Looking For?</FormLabel>
-                        <RadioGroup className={classes.radioGroup} aria-label="activities" name="mode" value={mode} onChange={handleCheck}>
+                        <RadioGroup className={classes.radioGroup} aria-label="activities" name="mode" value={mode} onChange={handleChange}>
                             <FormControlLabel value="bike" control={<Radio/>} label="Mountain Bike" />
                             <FormControlLabel value="run" control={<Radio/>} label="Trail Run" />
                             <FormControlLabel value="hike" control={<Radio/>} label="Hike" />
@@ -112,7 +102,7 @@ const Form = ({mode, travelType, timeLimit, errorMessage, handleChange, handleCh
             </Grid>
             <Grid container justify="center">
                 <Button variant="contained" className={classes.button} disabled={isDisabled} onClick={handleSubmit}>
-                    {isDisabled ? "Please Fill Out All Form Fields" : "Let's See Where You Can Go!"}
+                    {isDisabled ? "Please Fill Out All Form Fields" : "Let's Find Some Trails Near You!"}
                 </Button>
             </Grid>
 
