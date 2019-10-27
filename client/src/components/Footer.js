@@ -19,7 +19,8 @@ const useStyles = makeStyles({
         bottom: 0,
         display: "flex",
         flexDirection: "row",
-        flexGrow: 1
+        flexGrow: 1,
+        backgroundColor: "rgb(56, 168, 50)"
     },
     Typography: {
         margin: "auto"

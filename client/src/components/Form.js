@@ -1,13 +1,16 @@
 import React from 'react';
 import { FormControl, InputLabel, Select, Button, RadioGroup, FormControlLabel, Radio, TextField, Paper, Typography, Container, Grid, FormLabel} from '@material-ui/core';
-import {makeStyles} from '@material-ui/core/styles';
+import {makeStyles, rgbToHex} from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
     root: {
         textAlign: "center",
         display: "flex",
         flexDirection: "column",
-        alignContent: "center"
+        alignContent: "center",
+        backgroundColor: "rgba(255, 255, 255, 0.7)",
+        marginTop: "2em",
+        borderRadius: "5px"
     },
     Paper: {
         width: "80%",
@@ -44,8 +47,8 @@ const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabl
             <Typography variant="h3" className={classes.text}>What Trails are within your reach today?!</Typography>
             <Grid container alignContent="center" justify="center">
                 <Paper elevation={2} className={classes.Paper}>
-                    <Typography variant="p" className={classes.info}>
-                        This app uses your location, and some information you provide below (what type of trails you're looking for, and how much time you have to get to the trailhead), to display a map of 
+                    <Typography variant="body1">
+                        This app uses your location, and some information you provide below (what type of trails you're looking for, and how much time you have to get to the trailhead) to display a map of 
                         places you can go within that time limit, and, where there are some cool trails nearby.  When you click the button below you will be taken to a map page to help you navigate to the trails.
                     </Typography>
                 </Paper>
