@@ -20,7 +20,8 @@ const useStyles = makeStyles({
     appBar: {
         display: "flex",
         flexDirection: "column",
-        flexGrow: 1
+        flexGrow: 1,
+        backgroundColor: "rgb(56, 168, 50)"
     },
     Typography: {
         margin: "auto"
@@ -32,7 +33,7 @@ const NavBar = ({history, choices}) => {
     const classes = useStyles();
     const displayText = history => {
         const {pathname} = history.location;
-        return pathname === "/" ? "Welcome to Time for Training!" : "Get after it!";
+        return pathname === "/" ? "Welcome to Time for Trails!" : "Get after it!";
     }
 
     const renderCardGroup = choices => "mode" in choices ? <CardGroup choices={choices} /> : null;
