@@ -1,6 +1,21 @@
 import React from 'react';
-import { FormControl, InputLabel, Select, Button, RadioGroup, FormControlLabel, Radio, TextField, Paper, Typography, Container, Grid, FormLabel} from '@material-ui/core';
-import {makeStyles, rgbToHex} from '@material-ui/core/styles';
+import { 
+    FormControl, 
+    InputLabel, 
+    Select, 
+    Button, 
+    RadioGroup, 
+    FormControlLabel, 
+    Radio, 
+    TextField, 
+    Paper, 
+    Typography, 
+    Container, 
+    Grid, 
+    FormLabel,
+    MenuItem
+} from '@material-ui/core';
+import {makeStyles} from '@material-ui/core/styles';
 
 const useStyles = makeStyles({
     root: {
@@ -70,7 +85,6 @@ const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabl
                     <FormControl component="fieldset" className={classes.formControl}>
                         <InputLabel htmlFor="travel-select">How Are You Getting There?</InputLabel>
                         <Select
-                            native
                             value={travelType}
                             onChange={handleChange}
                             inputProps={{
@@ -78,10 +92,10 @@ const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabl
                                 name: 'travelType'
                             }}
                         >
-                            <option value="">Select</option>
-                            <option value="drive">Drive</option>
-                            <option value="bike">Bike</option>
-                            <option value="walk">Walk</option>
+                            <MenuItem value="">Select</MenuItem>
+                            <MenuItem value="drive">Drive</MenuItem>
+                            <MenuItem value="bike">Bike</MenuItem>
+                            <MenuItem value="walk">Walk</MenuItem>
                         </Select>
                     </FormControl>
                 </Paper>
