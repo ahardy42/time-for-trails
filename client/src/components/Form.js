@@ -70,6 +70,7 @@ const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabl
                     <FormControl component="fieldset" className={classes.formControl}>
                         <InputLabel htmlFor="select">How Are You Getting There?</InputLabel>
                         <Select
+                            native
                             value={travelType}
                             onChange={handleChange}
                             inputProps={{
