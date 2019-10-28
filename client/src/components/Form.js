@@ -68,8 +68,9 @@ const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabl
             <Grid container justify="center">
                 <Paper elevation={2} className={classes.Paper}>
                     <FormControl component="fieldset" className={classes.formControl}>
-                        <InputLabel htmlFor="select">How Are You Getting There?</InputLabel>
+                        <InputLabel htmlFor="travel-select">How Are You Getting There?</InputLabel>
                         <Select
+                            native
                             value={travelType}
                             onChange={handleChange}
                             inputProps={{
