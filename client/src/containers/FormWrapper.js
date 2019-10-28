@@ -38,7 +38,6 @@ class FormWrapper extends React.Component {
         this.props.setChoices(this.state);
         // go to the map page
         const {history} = this.props;
-        console.log(history);
         history.push('/map');
     }
     render = () => {
