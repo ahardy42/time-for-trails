@@ -1,8 +1,8 @@
 # time-to-train
 
-## deployed to AWS elasticbeanstalk
+## deployed to Heroku
 
-link: (TBD)
+link: https://time-for-trails.herokuapp.com/
 
 ## MVC design Pattern
 
