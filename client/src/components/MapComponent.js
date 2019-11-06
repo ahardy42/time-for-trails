@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Grid, Paper, Fab } from '@material-ui/core';
+import React from 'react';
+import { Grid, Paper, Fab, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {Home} from '@material-ui/icons';
 import { Map, LayersControl, LayerGroup, Marker, TileLayer, Polygon, Popup } from 'react-leaflet';
@@ -21,10 +21,21 @@ const useStyles = makeStyles({
         bottom: "15%",
         zIndex: 1000,
         marginLeft: "-32px"
+    },
+    mapLoading: {
+        opacity: 0.3
+    },
+    spinner: {
+        position: "absolute",
+        top: "50vh",
+        left: "50vw",
+        marginTop: "-100px",
+        marginLeft: "-100px",
+        zIndex: 500
     }
 });
 
-const MapComponent = ({ trailsInfo, handleClick }) => {
+const MapComponent = ({ trailsInfo, handleClick, isLoading }) => {
     let [context] = useChoicesValue();
     let center = [0, 0];
     let zoom = 3;
@@ -55,7 +66,15 @@ const MapComponent = ({ trailsInfo, handleClick }) => {
     return (
         <Grid container justify="center" alignContent="center" className={classes.root}>
             <Paper elevation={2} className={classes.Paper}>
-                <Map id="myMap" center={center} zoom={zoom} bounds={trailsInfo.bounds ? trailsInfo.bounds : null}>
+                {isLoading ? (
+                    <CircularProgress 
+                        color="secondary"
+                        size={200}
+                        thickness={5}
+                        className={classes.spinner}
+                    />
+                ) : null}
+                <Map id="myMap" className={isLoading ? classes.mapLoading : ""} center={center} zoom={zoom} bounds={trailsInfo.bounds ? trailsInfo.bounds : null}>
                     <LayersControl position="topleft">
                         <BaseLayer checked name="openstreetmap">
                             <TileLayer

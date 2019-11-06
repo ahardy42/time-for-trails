@@ -12,13 +12,14 @@ const MapWrapper = () => {
         trailsInfo: {
             trails: [],
             polygon: []
-        }
+        },
+        isLoading: true
     }
 
     const localReducer = (state, action) => {
         switch (action.type) {
             case "SET_TRAILS":
-                return {trailsInfo: action.payload}
+                return {trailsInfo: action.payload, isLoading: false}
             case "RESET_TRAILS":
                 return {initialLocalState}
             default:
@@ -75,7 +76,7 @@ const MapWrapper = () => {
     }, []);
 
     return (
-        <MapComponent handleClick={handleClick} trailsInfo={localState.trailsInfo} />
+        <MapComponent handleClick={handleClick} trailsInfo={localState.trailsInfo} isLoading={localState.isLoading}/>
     );
 }
 
