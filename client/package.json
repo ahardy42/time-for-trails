@@ -5,6 +5,7 @@
   "dependencies": {
     "@material-ui/core": "^4.5.1",
     "@material-ui/icons": "^4.5.1",
+    "@material-ui/lab": "^4.0.0-alpha.30",
     "leaflet": "^1.5.1",
     "node-sass": "^4.13.0",
     "react": "^16.11.0",

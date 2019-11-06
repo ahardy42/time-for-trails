@@ -8,4 +8,6 @@ router.get("/trails/run", controller.runController);
 
 router.get("/trails/hike", controller.hikeController);
 
+router.get("/location", controller.locationController);
+
 module.exports = router;

@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import {Home} from '@material-ui/icons';
 import { Map, LayersControl, LayerGroup, Marker, TileLayer, Polygon, Popup } from 'react-leaflet';
 import LocateControl from './LocateControl';
-import ChoicesContext from '../context/ChoicesContext';
+import { useChoicesValue } from '../context/ChoicesContext';
 const { Overlay, BaseLayer } = LayersControl;
 
 const useStyles = makeStyles({
@@ -24,8 +24,8 @@ const useStyles = makeStyles({
     }
 });
 
-const MapComponent = ({ trailsInfo, setChoices }) => {
-    let { choices } = useContext(ChoicesContext);
+const MapComponent = ({ trailsInfo, handleClick }) => {
+    let [context] = useChoicesValue();
     let center = [0, 0];
     let zoom = 3;
     const locateOptions = {
@@ -33,10 +33,6 @@ const MapComponent = ({ trailsInfo, setChoices }) => {
         follow: false,
         setView: false,
         keepCurrentZoomLevel: true,
-    }
-
-    const handleClick = event => {
-        setChoices({}); // setting choices to an empty object triggers a history.push("/"); in MapPage component!
     }
 
     const classes = useStyles();

@@ -51,8 +51,8 @@ const selectIcon = type => {
     }
 }
 
-const CardGroup = ({choices}) => {
-    let {mode, timeLimit, travelType} = choices;
+const CardGroup = ({context}) => {
+    let {mode, timeLimit, travelType} = context;
     let classes = useStyles();
     return (
         <GridList cellHeight="auto" className={classes.GridList} cols={3} style={{marginBottom: "5px"}}>

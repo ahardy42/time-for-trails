@@ -1,4 +1,5 @@
 import React from 'react';
+import {useHistory} from 'react-router-dom';
 // material UI imports
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -7,7 +8,7 @@ import {
     Hidden
 } from '@material-ui/core';
 
-import ChoicesContext from '../context/ChoicesContext';
+import {useChoicesValue} from '../context/ChoicesContext';
 import CardGroup from './CardGroup';
 
 const useStyles = makeStyles({
@@ -28,24 +29,29 @@ const useStyles = makeStyles({
     }
 });
 
-const NavBar = ({history, choices}) => {
+const NavBar = () => {
 
+    // hooks!
     const classes = useStyles();
+
+    const [context, dispatch] = useChoicesValue();
+
+    const history = useHistory();
+
+    // helper functions
     const displayText = history => {
         const {pathname} = history.location;
         return pathname === "/" ? "Welcome to Time for Trails!" : "Get after it!";
     }
 
-    const renderCardGroup = choices => "mode" in choices ? <CardGroup choices={choices} /> : null;
+    const renderCardGroup = (context) => context.mode !== "" ? <CardGroup context={context} /> : null;
 
     return (
         <div className={classes.root} >
             <AppBar position="static" className={classes.appBar}>
                 <Typography className={classes.Typography} variant="h6">{displayText(history)}</Typography>
                 <Hidden mdDown >
-                    <ChoicesContext.Consumer>
-                        {({choices}) => renderCardGroup(choices)}
-                    </ChoicesContext.Consumer>
+                        {renderCardGroup(context)}
                 </Hidden>
             </AppBar>
         </div>
