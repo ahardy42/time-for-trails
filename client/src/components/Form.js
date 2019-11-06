@@ -16,6 +16,8 @@ import {
     MenuItem
 } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
+// component import
+import SwitchedContainer from '../containers/SwitchedContainer';
 
 const useStyles = makeStyles({
     root: {
@@ -72,7 +74,7 @@ const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabl
                 <Paper elevation={2} className={classes.Paper}>
                     <FormControl component="fieldset" className={classes.formControl}>
                         <FormLabel component="legend">What Type of Trail are you Looking For?</FormLabel>
-                        <RadioGroup className={classes.radioGroup} aria-label="activities" name="mode" value={mode} onChange={handleChange}>
+                        <RadioGroup className={classes.radioGroup} aria-label="activities" name="SET_MODE" value={mode} onChange={handleChange}>
                             <FormControlLabel value="bike" control={<Radio/>} label="Mountain Bike" />
                             <FormControlLabel value="run" control={<Radio/>} label="Trail Run" />
                             <FormControlLabel value="hike" control={<Radio/>} label="Hike" />
@@ -89,7 +91,7 @@ const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabl
                             onChange={handleChange}
                             inputProps={{
                                 id: 'travel-select',
-                                name: 'travelType'
+                                name: 'SET_TYPE'
                             }}
                         >
                             <MenuItem value="">Select</MenuItem>
@@ -105,7 +107,7 @@ const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabl
                     <TextField
                         id="number"
                         label="How much travel time do you have (minutes)?"
-                        name="timeLimit"
+                        name="SET_TIME"
                         value={timeLimit > 0 ? timeLimit : ""}
                         error={timeLimit > 0 ? false : true}
                         onChange={handleChange}
@@ -116,6 +118,11 @@ const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabl
                         }}
                         margin="normal"
                     />
+                </Paper>
+            </Grid>
+            <Grid container justify="center">
+                <Paper elevation={2} className={classes.Paper}>
+                    <SwitchedContainer />
                 </Paper>
             </Grid>
             <Grid container justify="center">

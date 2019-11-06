@@ -1,19 +1,22 @@
 import React from 'react';
+import { Redirect } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 import MapWrapper from '../containers/MapWrapper';
 import Footer from '../components/Footer';
-import ChoicesContext from '../context/ChoicesContext';
+import { useChoicesValue } from '../context/ChoicesContext';
 
-const MapPage = ({ history }) => {
+const MapPage = () => {
+
+    const [context] = useChoicesValue();
+
+    if (context.mode === "") {
+        return <Redirect to="/" />
+    }
 
     return (
         <>
-            <NavBar history={history} />
-            <ChoicesContext.Consumer>
-                {({ choices, setChoices }) => "mode" in choices ? (
-                    <MapWrapper setChoices={setChoices} choices={choices} history={history} />
-                ) : history.push("/")}
-            </ChoicesContext.Consumer>
+            <NavBar />
+            <MapWrapper />
             <Footer />
         </>
     )
