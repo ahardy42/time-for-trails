@@ -39,7 +39,7 @@ const SwitchedField = ({ handleChange, searchVal, checked, isSkeleton, locations
                 control={
                     <Switch checked={checked} onChange={setChecked} value={checked} />
                 }
-                label={checked ? "use my location" : "search for a location"}
+                label={checked ? "un-check to use your location" : "search for a location"}
             />
             <Collapse in={checked}>
                 <TextField

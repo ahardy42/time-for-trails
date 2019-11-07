@@ -7,13 +7,17 @@ import LocateControl from './LocateControl';
 import { useChoicesValue } from '../context/ChoicesContext';
 const { Overlay, BaseLayer } = LayersControl;
 
-const useStyles = makeStyles({
+const useStyles = makeStyles( theme => ({
     root: {
         height: "80vh"
     },
     Paper: {
         width: "80%",
-        height: "80%"
+        height: "80%",
+        [theme.breakpoints.down('sm')]: {
+            width: "100%",
+            height: "100%"
+        }
     },
     Fab: {
         position: "absolute",
@@ -33,7 +37,7 @@ const useStyles = makeStyles({
         marginLeft: "-100px",
         zIndex: 500
     }
-});
+}));
 
 const MapComponent = ({ trailsInfo, handleClick, isLoading }) => {
     let [context] = useChoicesValue();
@@ -49,15 +53,19 @@ const MapComponent = ({ trailsInfo, handleClick, isLoading }) => {
     const classes = useStyles();
 
     const renderPopup = ({name, imgSmall, url, summary}) => {
+        const renderAttrText = url => {
+            let reg = new RegExp('www.*.com');
+            return reg.exec(url);
+        }
         return (
             <Popup options={{autoPan: true}}>
                 <div className="popup-content">
                     <h3>{name}</h3>
                     <p>{summary}</p>
                     <br/>
-                    <img src={imgSmall} alt='trail image'/>
+                    {imgSmall.length ? (<img src={imgSmall} alt='trail image'/>) : null}
                     <br/>
-                    <a href={url} target='_blank'>here's some more info...</a>
+                    <a href={url} target='_blank'>here's some more info from {renderAttrText(url)}</a>
                 </div>
             </Popup>
         )

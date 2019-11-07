@@ -26,7 +26,7 @@ const useStyles = makeStyles({
         flexDirection: "column",
         alignContent: "center",
         backgroundColor: "rgba(255, 255, 255, 0.7)",
-        marginTop: "2em",
+        margin: "2em 0 5em 0",
         borderRadius: "5px"
     },
     Paper: {
@@ -65,7 +65,7 @@ const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabl
             <Grid container alignContent="center" justify="center">
                 <Paper elevation={2} className={classes.Paper}>
                     <Typography variant="body1">
-                        This app uses your location, and some information you provide below (what type of trails you're looking for, and how much time you have to get to the trailhead) to display a map of 
+                        This app uses your location (or a location of your choosing), and some information you provide below (what type of trails you're looking for, and how much time you have to get to the trailhead) to display a map of 
                         places you can go within that time limit, and, where there are some cool trails nearby.  When you click the button below you will be taken to a map page to help you navigate to the trails.
                     </Typography>
                 </Paper>
@@ -115,6 +115,9 @@ const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabl
                         className={classes.TextField}
                         InputLabelProps={{
                             shrink: true,
+                        }}
+                        inputProps={{
+                            pattern: "[0-9]*"
                         }}
                         margin="normal"
                     />
