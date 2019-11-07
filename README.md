@@ -1,4 +1,4 @@
-# time-to-train
+# time-for-trails
 
 ## deployed to Heroku
 
