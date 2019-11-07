@@ -11,8 +11,7 @@ const useStyles = makeStyles({
     root: {
         display: "flex",
         flexDirection: "row",
-        flexGrow: 1,
-        height: "10vh"
+        flexGrow: 1
     },
     appBarFooter: {
         position: "fixed",
@@ -20,7 +19,8 @@ const useStyles = makeStyles({
         display: "flex",
         flexDirection: "row",
         flexGrow: 1,
-        backgroundColor: "rgb(56, 168, 50)"
+        backgroundColor: "rgb(56, 168, 50)",
+        height: "10vh"
     },
     Typography: {
         margin: "auto"
@@ -32,7 +32,7 @@ const Footer = props => {
 
     return (
         <div className={classes.root}>
-            <AppBar position="relative" className={classes.appBarFooter}>
+            <AppBar position="relative" className={classes.appBarFooter} component="footer">
                 <Typography className={classes.Typography} variant="h6">Andy Hardy | <Link color="inherit" href="https://www.ahardy42.com" target="_blank">Portfolio</Link></Typography>
             </AppBar>
         </div>
