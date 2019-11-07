@@ -44,7 +44,7 @@ const NavBar = () => {
         return pathname === "/" ? "Welcome to Time for Trails!" : "Get after it!";
     }
 
-    const renderCardGroup = (context) => context.mode !== "" ? <CardGroup context={context} /> : null;
+    const renderCardGroup = (context) => history.location.pathname === "/map" ? <CardGroup context={context} /> : null;
 
     return (
         <div className={classes.root} >
