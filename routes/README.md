@@ -64,3 +64,34 @@ structure of the response:
     ]
 }
 ```
+
+```GET /api/location?q=<search>```
+
+this route returns an array of locations using the search term provided.  
+
+structure of the response using frisco+co as search string:
+
+```js
+[
+    {
+        "place_id": 83681915,
+        "licence": "Data © OpenStreetMap contributors, ODbL 1.0. https://osm.org/copyright",
+        "osm_type": "way",
+        "osm_id": 33112522,
+        "boundingbox": [
+            "39.567178",
+            "39.5986876",
+            "-106.1140402",
+            "-106.0649182"
+        ],
+        "lat": "39.5744299",
+        "lon": "-106.0975196",
+        "display_name": "Frisco, Summit County, Colorado, United States",
+        "class": "boundary",
+        "type": "administrative",
+        "importance": 0.482240924205224,
+        "icon": "https://nominatim.openstreetmap.org/images/mapicons/poi_boundary_administrative.p.20.png"
+    },
+    ...
+]
+```
