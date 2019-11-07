@@ -116,6 +116,9 @@ const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabl
                         InputLabelProps={{
                             shrink: true,
                         }}
+                        inputProps={{
+                            pattern: "[0-9]*"
+                        }}
                         margin="normal"
                     />
                 </Paper>
