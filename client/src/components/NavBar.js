@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 // material UI imports
 import { makeStyles } from '@material-ui/core/styles';
@@ -7,6 +7,7 @@ import {
     Typography,
     Hidden
 } from '@material-ui/core';
+import ModalWrapper from '../containers/ModalWrapper';
 
 import {useChoicesValue} from '../context/ChoicesContext';
 import CardGroup from './CardGroup';
@@ -31,6 +32,9 @@ const useStyles = makeStyles({
 
 const NavBar = () => {
 
+    // simple state to use with the modal
+    const [state, setState] = useState({isOpen: false, variant: ""});
+
     // hooks!
     const classes = useStyles();
 
@@ -38,13 +42,27 @@ const NavBar = () => {
 
     const history = useHistory();
 
+    // event handlers
+    const handleClick = event => {
+
+        let {id} = event.currentTarget;
+
+        setState({
+            isOpen: true,
+            variant: id
+        });
+        
+    }
+
+    const setIsOpen = bool => setState({...state, isOpen: bool});
+
     // helper functions
     const displayText = history => {
         const {pathname} = history.location;
         return pathname === "/" ? "Welcome to Time for Trails!" : "Get after it!";
     }
 
-    const renderCardGroup = (context) => history.location.pathname === "/map" ? <CardGroup context={context} /> : null;
+    const renderCardGroup = (context) => history.location.pathname === "/map" ? <CardGroup context={context} handleClick={handleClick} /> : null;
 
     return (
         <div className={classes.root} >
@@ -54,6 +72,7 @@ const NavBar = () => {
                         {renderCardGroup(context)}
                 </Hidden>
             </AppBar>
+            <ModalWrapper variant={state.variant} isOpen={state.isOpen} setIsOpen={setIsOpen} />
         </div>
     );
 }

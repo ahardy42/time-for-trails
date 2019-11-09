@@ -18,6 +18,7 @@ import {
 import {makeStyles} from '@material-ui/core/styles';
 // component import
 import SwitchedContainer from '../containers/SwitchedContainer';
+import FormSubComponent from './FormSubComponent';
 
 const useStyles = makeStyles({
     root: {
@@ -72,55 +73,17 @@ const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabl
             </Grid>
             <Grid container alignContent="center" justify="center">
                 <Paper elevation={2} className={classes.Paper}>
-                    <FormControl component="fieldset" className={classes.formControl}>
-                        <FormLabel component="legend">What Type of Trail are you Looking For?</FormLabel>
-                        <RadioGroup className={classes.radioGroup} aria-label="activities" name="SET_MODE" value={mode} onChange={handleChange}>
-                            <FormControlLabel value="bike" control={<Radio/>} label="Mountain Bike" />
-                            <FormControlLabel value="run" control={<Radio/>} label="Trail Run" />
-                            <FormControlLabel value="hike" control={<Radio/>} label="Hike" />
-                        </RadioGroup>
-                    </FormControl>
+                    <FormSubComponent classes={classes} value={mode} variant="MODE" handleChange={handleChange} />
                 </Paper>
             </Grid>
             <Grid container justify="center">
                 <Paper elevation={2} className={classes.Paper}>
-                    <FormControl component="fieldset" className={classes.formControl}>
-                        <InputLabel htmlFor="travel-select">How Are You Getting There?</InputLabel>
-                        <Select
-                            value={travelType}
-                            onChange={handleChange}
-                            inputProps={{
-                                id: 'travel-select',
-                                name: 'SET_TYPE'
-                            }}
-                        >
-                            <MenuItem value="">Select</MenuItem>
-                            <MenuItem value="drive">Drive</MenuItem>
-                            <MenuItem value="bike">Bike</MenuItem>
-                            <MenuItem value="walk">Walk</MenuItem>
-                        </Select>
-                    </FormControl>
+                    <FormSubComponent classes={classes} value={travelType} variant="TYPE" handleChange={handleChange} />
                 </Paper>
             </Grid>
             <Grid container justify="center">
                 <Paper elevation={2} className={classes.Paper}>
-                    <TextField
-                        id="number"
-                        label="How much travel time do you have (minutes)?"
-                        name="SET_TIME"
-                        value={timeLimit > 0 ? timeLimit : ""}
-                        error={timeLimit > 0 ? false : true}
-                        onChange={handleChange}
-                        type="number"
-                        className={classes.TextField}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                        inputProps={{
-                            pattern: "[0-9]*"
-                        }}
-                        margin="normal"
-                    />
+                    <FormSubComponent classes={classes} value={timeLimit} variant="TIME" handleChange={handleChange} />
                 </Paper>
             </Grid>
             <Grid container justify="center">

@@ -51,22 +51,22 @@ const selectIcon = type => {
     }
 }
 
-const CardGroup = ({context}) => {
+const CardGroup = ({context, handleClick}) => {
     let {mode, timeLimit, travelType} = context;
     let classes = useStyles();
     return (
         <GridList cellHeight="auto" className={classes.GridList} cols={3} style={{marginBottom: "5px"}}>
-            <GridListTile cols={1} className={classes.Tile}>
+            <GridListTile cols={1} className={classes.Tile} id="TYPE" onClick={handleClick}>
                 <Card elevation={2} className={classes.TileCard}>
                     <Typography variant="h6" className={classes.Typography}>Travel Method: {selectIcon(travelType)}</Typography>
                 </Card>
             </GridListTile>
-            <GridListTile cols={1} className={classes.Tile}>
+            <GridListTile cols={1} className={classes.Tile} id="TIME" onClick={handleClick}>
                 <Card elevation={2} className={classes.TileCard}>
                     <Typography variant="h6" className={classes.Typography}>Time Limit: {timeLimit} minutes</Typography>
                 </Card>
             </GridListTile>
-            <GridListTile cols={1} className={classes.Tile}>
+            <GridListTile cols={1} className={classes.Tile} id="MODE" onClick={handleClick}>
                 <Card elevation={2} className={classes.TileCard}>
                     <Typography variant="h6" className={classes.Typography}>Trail Type: {selectIcon(mode)}</Typography>
                 </Card>
