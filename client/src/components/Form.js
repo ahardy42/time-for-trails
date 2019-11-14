@@ -18,7 +18,7 @@ const useStyles = makeStyles({
         flexDirection: "column",
         alignContent: "center",
         backgroundColor: "rgba(255, 255, 255, 0.7)",
-        margin: "2em 0 5em 0",
+        margin: "2em auto 5em auto",
         borderRadius: "5px"
     },
     Paper: {
