@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
 // material UI imports
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -9,8 +9,9 @@ import {
 } from '@material-ui/core';
 import ModalWrapper from '../containers/ModalWrapper';
 
-import {useChoicesValue} from '../context/ChoicesContext';
+import { useChoicesValue } from '../context/ChoicesContext';
 import CardGroup from './CardGroup';
+import ChoicesMenu from './ChoicesMenu';
 
 const useStyles = makeStyles({
     root: {
@@ -33,7 +34,7 @@ const useStyles = makeStyles({
 const NavBar = () => {
 
     // simple state to use with the modal
-    const [state, setState] = useState({isOpen: false, variant: ""});
+    const [state, setState] = useState({ isOpen: false, variant: "" });
 
     // hooks!
     const classes = useStyles();
@@ -45,34 +46,41 @@ const NavBar = () => {
     // event handlers
     const handleClick = event => {
 
-        let {id} = event.currentTarget;
+        let { id } = event.currentTarget;
 
         setState({
             isOpen: true,
             variant: id
         });
-        
+
     }
 
-    const setIsOpen = bool => setState({...state, isOpen: bool});
+    const setIsOpen = bool => setState({ ...state, isOpen: bool });
 
     // helper functions
     const renderText = history => {
-        const {pathname} = history.location;
+        const { pathname } = history.location;
         return pathname === "/" ? (
             <Typography className={classes.Typography} variant="h6">Welcome to Time for Trails!</Typography>
         ) : null;
     }
 
-    const renderCardGroup = (context) => history.location.pathname === "/map" ? <CardGroup context={context} handleClick={handleClick} /> : null;
-
     return (
         <div className={classes.root} >
             <AppBar position="static" className={classes.appBar}>
-            {renderText(history)}
-                {/* <Hidden smDown > */}
-                        {renderCardGroup(context)}
-                {/* </Hidden> */}
+                {renderText(history)}
+                <Hidden smDown >
+                    {history.location.pathname === "/map" ? (
+                        // rendering a card group on larger devices
+                        <CardGroup context={context} handleClick={handleClick} />
+                    ) : null}
+                </Hidden>
+                <Hidden mdUp>
+                    {history.location.pathname === "/map" ? (
+                        // rendering a menu on small screens
+                        <ChoicesMenu handleClick={handleClick} />
+                    ) : null}
+                </Hidden>
             </AppBar>
             <ModalWrapper variant={state.variant} isOpen={state.isOpen} setIsOpen={setIsOpen} />
         </div>

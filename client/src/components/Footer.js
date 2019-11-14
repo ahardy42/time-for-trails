@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 // material UI imports
 import { makeStyles } from '@material-ui/core/styles';
 import {
@@ -27,7 +27,7 @@ const useStyles = makeStyles({
     }
 })
 
-const Footer = props => {
+const Footer = () => {
     const classes = useStyles();
 
     return (

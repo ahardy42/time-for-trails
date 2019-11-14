@@ -1,19 +1,15 @@
 import React from 'react';
 // material UI imports
 import { makeStyles } from '@material-ui/core/styles';
-import { 
-    DirectionsBikeTwoTone,
-    DirectionsWalkTwoTone,
-    DriveEtaTwoTone,
-    DirectionsRunTwoTone
-} from '@material-ui/icons/'
+
 import {
     Card,
     Typography,
     GridList,
-    GridListTile,
-    Button
+    GridListTile
 } from '@material-ui/core';
+
+import MenuIcon from './MenuIcon';
 
 const useStyles = makeStyles({
     GridList: {
@@ -40,31 +36,14 @@ const useStyles = makeStyles({
     }
 });
 
-const selectIcon = type => {
-    switch (type) {
-        case "drive":
-            return <DriveEtaTwoTone fontSize="large" htmlColor="green"/>
-        case "bike":
-            return <DirectionsBikeTwoTone fontSize="large" htmlColor="green"/>
-        case "walk":
-            return <DirectionsWalkTwoTone fontSize="large" htmlColor="green"/>
-        case "hike":
-            return <DirectionsWalkTwoTone fontSize="large" htmlColor="green"/>
-        case "run":
-            return <DirectionsRunTwoTone fontSize="large" htmlColor="green"/>
-        default:
-            return null
-    }
-}
-
-const CardGroup = ({context, handleClick}) => {
-    let {mode, timeLimit, travelType} = context;
+const CardGroup = ({ context, handleClick }) => {
+    let { mode, timeLimit, travelType } = context;
     let classes = useStyles();
     return (
-        <GridList cellHeight="auto" className={classes.GridList} cols={3} style={{margin: "0"}}>
+        <GridList cellHeight="auto" className={classes.GridList} cols={3} style={{ margin: "0" }}>
             <GridListTile cols={1} className={classes.Tile} id="TYPE" onClick={handleClick}>
                 <Card elevation={2} className={classes.TileCard}>
-                    <Typography variant="h6" className={classes.Typography}>Travel Method: {selectIcon(travelType)}</Typography>
+                    <Typography variant="h6" className={classes.Typography}>Travel Method: {<MenuIcon type={travelType}  size="large"/>}</Typography>
                 </Card>
             </GridListTile>
             <GridListTile cols={1} className={classes.Tile} id="TIME" onClick={handleClick}>
@@ -74,7 +53,7 @@ const CardGroup = ({context, handleClick}) => {
             </GridListTile>
             <GridListTile cols={1} className={classes.Tile} id="MODE" onClick={handleClick}>
                 <Card elevation={2} className={classes.TileCard}>
-                    <Typography variant="h6" className={classes.Typography}>Trail Type: {selectIcon(mode)}</Typography>
+                    <Typography variant="h6" className={classes.Typography}>Trail Type: {<MenuIcon type={mode} size="large"/>}</Typography>
                 </Card>
             </GridListTile>
         </GridList>
