@@ -3,8 +3,8 @@ import { Grid, Paper, Fab, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {Home} from '@material-ui/icons';
 import { Map, LayersControl, LayerGroup, Marker, TileLayer, Polygon, Popup } from 'react-leaflet';
+
 import LocateControl from './LocateControl';
-import { useChoicesValue } from '../context/ChoicesContext';
 const { Overlay, BaseLayer } = LayersControl;
 
 const useStyles = makeStyles( theme => ({
@@ -40,7 +40,7 @@ const useStyles = makeStyles( theme => ({
 }));
 
 const MapComponent = ({ trailsInfo, handleClick, isLoading }) => {
-    let [context] = useChoicesValue();
+
     let center = [0, 0];
     let zoom = 3;
     const locateOptions = {
@@ -63,9 +63,9 @@ const MapComponent = ({ trailsInfo, handleClick, isLoading }) => {
                     <h3>{name}</h3>
                     <p>{summary}</p>
                     <br/>
-                    {imgSmall.length ? (<img src={imgSmall} alt='trail image'/>) : null}
+                    {imgSmall.length ? (<img src={imgSmall} alt='picture of the trail'/>) : null}
                     <br/>
-                    <a href={url} target='_blank'>here's some more info from {renderAttrText(url)}</a>
+                    <a href={url} target='_blank' rel="noopener noreferrer">here's some more info from {renderAttrText(url)}</a>
                 </div>
             </Popup>
         )

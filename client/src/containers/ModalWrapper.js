@@ -83,6 +83,8 @@ const ModalWrapper = ({variant, setIsOpen, isOpen}) => {
                 return state.travelType;
             case "TIME":
                 return state.timeLimit;
+            default:
+                return null;
         }
     }
 
