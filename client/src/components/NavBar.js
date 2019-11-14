@@ -38,7 +38,7 @@ const NavBar = () => {
     // hooks!
     const classes = useStyles();
 
-    const [context, dispatch] = useChoicesValue();
+    const [context] = useChoicesValue();
 
     const history = useHistory();
 
@@ -57,9 +57,11 @@ const NavBar = () => {
     const setIsOpen = bool => setState({...state, isOpen: bool});
 
     // helper functions
-    const displayText = history => {
+    const renderText = history => {
         const {pathname} = history.location;
-        return pathname === "/" ? "Welcome to Time for Trails!" : "Get after it!";
+        return pathname === "/" ? (
+            <Typography className={classes.Typography} variant="h6">Welcome to Time for Trails!</Typography>
+        ) : null;
     }
 
     const renderCardGroup = (context) => history.location.pathname === "/map" ? <CardGroup context={context} handleClick={handleClick} /> : null;
@@ -67,10 +69,10 @@ const NavBar = () => {
     return (
         <div className={classes.root} >
             <AppBar position="static" className={classes.appBar}>
-                <Typography className={classes.Typography} variant="h6">{displayText(history)}</Typography>
-                <Hidden mdDown >
+            {renderText(history)}
+                {/* <Hidden smDown > */}
                         {renderCardGroup(context)}
-                </Hidden>
+                {/* </Hidden> */}
             </AppBar>
             <ModalWrapper variant={state.variant} isOpen={state.isOpen} setIsOpen={setIsOpen} />
         </div>

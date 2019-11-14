@@ -11,12 +11,15 @@ import {
     Card,
     Typography,
     GridList,
-    GridListTile
+    GridListTile,
+    Button
 } from '@material-ui/core';
 
 const useStyles = makeStyles({
     GridList: {
-        justifyContent: "space-between"
+        justifyContent: "space-around",
+        alignContent: "center",
+        height: "100%"
     },
     Tile: {
         display: "flex",
@@ -31,6 +34,9 @@ const useStyles = makeStyles({
         justifyContent: "center",
         alignItems: "center",
         padding: "0 5px"
+    },
+    editFab: {
+
     }
 });
 
@@ -55,7 +61,7 @@ const CardGroup = ({context, handleClick}) => {
     let {mode, timeLimit, travelType} = context;
     let classes = useStyles();
     return (
-        <GridList cellHeight="auto" className={classes.GridList} cols={3} style={{marginBottom: "5px"}}>
+        <GridList cellHeight="auto" className={classes.GridList} cols={3} style={{margin: "0"}}>
             <GridListTile cols={1} className={classes.Tile} id="TYPE" onClick={handleClick}>
                 <Card elevation={2} className={classes.TileCard}>
                     <Typography variant="h6" className={classes.Typography}>Travel Method: {selectIcon(travelType)}</Typography>
