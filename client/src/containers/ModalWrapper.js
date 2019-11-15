@@ -43,9 +43,15 @@ const ModalWrapper = ({variant, setIsOpen, isOpen}) => {
 
         let {name, value} = event.target;
 
+        let updatedVal = null;
+        if (name === "SET_TIME" && value > 60) {
+            // preventing submissions greater than 60 min
+            updatedVal = 60;
+        } 
+
         localDispatch({
             type: name,
-            payload: value
+            payload: updatedVal || value
         });
 
     }
