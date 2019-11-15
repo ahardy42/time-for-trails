@@ -53,7 +53,7 @@ const SwitchedContainer = () => {
                 console.log(error);
             }
         }, 3000);
-        setTimer(wickyTrees);
+        setTimer(wickyTrees); // setTimeout returns a number so this needs to be kept track of in the component's state
     }
 
     const stop = () => clearTimeout(timer);

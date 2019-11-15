@@ -5,13 +5,13 @@ import {
     FormGroup,
     TextField,
     Collapse,
-    GridList,
-    GridListTile,
-    GridListTileBar,
+    List,
+    ListItem,
+    ListItemText,
     Typography,
     Divider
 } from '@material-ui/core';
-import LocationCityIcon from '@material-ui/icons/LocationCity';
+// import LocationCityIcon from '@material-ui/icons/LocationCity';
 import { Skeleton } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/styles';
 
@@ -26,6 +26,11 @@ const useStyles = makeStyles({
     },
     divider: {
         margin: "10px 0"
+    },
+    list: {
+        maxHeight: "150px",
+        overflow: "scroll",
+        boxShadow: "inset 0 0 5px 0 black"
     }
 })
 
@@ -52,33 +57,29 @@ const SwitchedField = ({ handleChange, searchVal, checked, isSkeleton, locations
                 {!isSkeleton && locations.length ? (
                         <>
                             <Divider className={classes.divider} />
-                            <Typography variant="subtitle1" align="center" gutterBottom>Select A City!</Typography>
+                            <Typography variant="subtitle1" align="center" gutterBottom>Select A City Below!</Typography>
                         </>
                     ) : null}
-                <GridList cellHeight={50} cols={3}>
+                <List className={!isSkeleton && locations.length > 2 ? classes.list : null}>
                     {
                         isSkeleton ? (
-                            <GridListTile cols={3}><Skeleton variant="rect" height={50} /></GridListTile>
+                            <ListItem><Skeleton variant="rect" height={50} width="100%" /></ListItem>
                         ) : (
                                 locations.map((location, index) => {
                                     return(
-                                        <GridListTile 
+                                        <ListItem 
+                                            button
                                             key={index} 
                                             onClick={() => setLatLng(index, {lat: parseFloat(location.lat), lng: parseFloat(location.lon)})}
-                                            className={outline === index ? classes.outline : classes.button}
+                                            selected={outline === index}
                                         >
-                                            <GridListTileBar 
-                                                title={location.display_name}
-                                                actionIcon={
-                                                    <LocationCityIcon />
-                                                }
-                                            />
-                                        </GridListTile>
+                                            <ListItemText primary={location.display_name} secondary={location.type}/>
+                                        </ListItem>
                                     );
                                 })
                             )
                     }
-                </GridList>
+                </List>
             </Collapse>
         </FormGroup>
     );
