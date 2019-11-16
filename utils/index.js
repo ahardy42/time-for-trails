@@ -15,7 +15,7 @@ module.exports = {
             case 'bike':
                 return 'cycling-regular';
             default:
-                return 'cycling-regular'; // walk returns isochrone for biking at this point
+                return 'foot-walking'; // walk returns isochrone for walking
         }
     }
 }

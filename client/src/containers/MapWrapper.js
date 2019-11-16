@@ -76,7 +76,7 @@ const MapWrapper = () => {
     }, []);
 
     return (
-        <MapComponent handleClick={handleClick} trailsInfo={localState.trailsInfo} isLoading={localState.isLoading}/>
+        <MapComponent handleClick={handleClick} trailsInfo={localState.trailsInfo} isLoading={localState.isLoading} choices={state} />
     );
 }
 
