@@ -2,7 +2,8 @@ import React from 'react';
 import { Grid, Paper, Fab, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {Home} from '@material-ui/icons';
-import { Map, LayersControl, LayerGroup, Marker, TileLayer, Polygon } from 'react-leaflet';
+import { Map, LayersControl, LayerGroup, TileLayer, Polygon } from 'react-leaflet';
+import MyMarker from './leaflet/MyMarker';
 import MyPopup from './leaflet/MyPopup';
 import PolyPopup from './leaflet/PolyPopup';
 import LocateControl from './LocateControl';
@@ -86,7 +87,18 @@ const MapComponent = ({ trailsInfo, handleClick, isLoading, choices }) => {
                         <Overlay name="trails nearby" checked={true}>
                             <LayerGroup>
                                 {/* mapping the trails markers */}
-                                {trailsInfo.trails.map((trail, index) => <Marker key={index} position={[trail.latitude, trail.longitude]}><MyPopup trail={trail} /></Marker>)}
+                                {trailsInfo.trails.map((trail, index) => {
+                                    return (
+                                        <MyMarker 
+                                            key={index} 
+                                            position={[trail.latitude, trail.longitude]}
+                                            icon={choices.mode}
+                                            markerColor={trail.difficulty}
+                                        >
+                                            <MyPopup trail={trail} />
+                                        </MyMarker>
+                                    )
+                                })}
                             </LayerGroup>
                         </Overlay>
                     </LayersControl>
