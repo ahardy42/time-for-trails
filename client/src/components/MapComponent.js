@@ -2,9 +2,11 @@ import React from 'react';
 import { Grid, Paper, Fab, CircularProgress } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import {Home} from '@material-ui/icons';
-import { Map, LayersControl, LayerGroup, Marker, TileLayer, Polygon, Popup } from 'react-leaflet';
-
+import { Map, LayersControl, LayerGroup, Marker, TileLayer, Polygon } from 'react-leaflet';
+import MyPopup from './leaflet/MyPopup';
+import PolyPopup from './leaflet/PolyPopup';
 import LocateControl from './LocateControl';
+
 const { Overlay, BaseLayer } = LayersControl;
 
 const useStyles = makeStyles( theme => ({
@@ -39,7 +41,7 @@ const useStyles = makeStyles( theme => ({
     }
 }));
 
-const MapComponent = ({ trailsInfo, handleClick, isLoading }) => {
+const MapComponent = ({ trailsInfo, handleClick, isLoading, choices }) => {
 
     let center = [0, 0];
     let zoom = 3;
@@ -51,25 +53,6 @@ const MapComponent = ({ trailsInfo, handleClick, isLoading }) => {
     }
 
     const classes = useStyles();
-
-    const renderPopup = ({name, imgSmall, url, summary}) => {
-        const renderAttrText = url => {
-            let reg = new RegExp('www.*.com');
-            return reg.exec(url);
-        }
-        return (
-            <Popup options={{autoPan: true}}>
-                <div className="popup-content">
-                    <h3>{name}</h3>
-                    <p>{summary}</p>
-                    <br/>
-                    {imgSmall.length ? (<img src={imgSmall} alt='picture of the trail'/>) : null}
-                    <br/>
-                    <a href={url} target='_blank' rel="noopener noreferrer">here's some more info from {renderAttrText(url)}</a>
-                </div>
-            </Popup>
-        )
-    }
 
     return (
         <Grid container justify="center" alignContent="center" className={classes.root}>
@@ -90,13 +73,20 @@ const MapComponent = ({ trailsInfo, handleClick, isLoading }) => {
                                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                             />
                         </BaseLayer>
-                        <Overlay name="distance polygon" checked={true}>
-                            <Polygon positions={trailsInfo.polygon || []} />
+                        <Overlay name="travel limit" checked={true}>
+                            <Polygon positions={trailsInfo.polygon || []} color="#38a832">
+                                <PolyPopup 
+                                    trailsNum={trailsInfo.trails.length} 
+                                    mode={choices.mode} 
+                                    timeLimit={choices.timeLimit} 
+                                    travelType={choices.travelType}
+                                />
+                            </Polygon>
                         </Overlay>
-                        <Overlay name="trails" checked={true}>
+                        <Overlay name="trails nearby" checked={true}>
                             <LayerGroup>
                                 {/* mapping the trails markers */}
-                                {trailsInfo.trails.map((trail, index) => <Marker key={index} position={[trail.latitude, trail.longitude]}>{renderPopup(trail)}</Marker>)}
+                                {trailsInfo.trails.map((trail, index) => <Marker key={index} position={[trail.latitude, trail.longitude]}><MyPopup trail={trail} /></Marker>)}
                             </LayerGroup>
                         </Overlay>
                     </LayersControl>
