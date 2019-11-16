@@ -10,7 +10,7 @@ import {
 import ModalWrapper from '../containers/ModalWrapper';
 
 import { useChoicesValue } from '../context/ChoicesContext';
-import CardGroup from './CardGroup';
+import NavButtons from './NavButtons';
 import ChoicesMenu from './ChoicesMenu';
 
 const useStyles = makeStyles({
@@ -72,7 +72,7 @@ const NavBar = () => {
                 <Hidden smDown >
                     {history.location.pathname === "/map" ? (
                         // rendering a card group on larger devices
-                        <CardGroup context={context} handleClick={handleClick} />
+                        <NavButtons context={context} handleClick={handleClick} />
                     ) : null}
                 </Hidden>
                 <Hidden mdUp>
