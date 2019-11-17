@@ -18,10 +18,11 @@ const FormWrapper = () => {
     const handleChange = event => {
         // handler for travel type selector, and time limit input
         const { name, value } = event.target;
+
         let updatedVal = null;
-        if (name === "SET_TIME" && value > 60) {
+        if (name === "SET_TIME") {
             // preventing submissions greater than 60 min
-            updatedVal = 60;
+            if (value > 60) updatedVal = 60;
         } 
         dispatch({
             type: name,

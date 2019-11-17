@@ -22,6 +22,8 @@ const MapWrapper = () => {
                 return {trailsInfo: action.payload, isLoading: false}
             case "RESET_TRAILS":
                 return {initialLocalState}
+            case "START_SPINNER":
+                return {...state, isLoading: true}
             default:
                 return state;
         }
@@ -65,7 +67,11 @@ const MapWrapper = () => {
 
     // effect hooks
     useEffect( () => {
+
+        // change to choices will trigger a spinner
+        localDispatch({type: "START_SPINNER"});
         
+        // then hit API for new trails info
         getSomeTrails().then(trails => localDispatch({type: "SET_TRAILS", payload: trails}));
 
     }, [state]);

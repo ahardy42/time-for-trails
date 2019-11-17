@@ -44,7 +44,7 @@ const useStyles = makeStyles( theme => ({
 
 const MapComponent = ({ trailsInfo, handleClick, isLoading, choices }) => {
 
-    let center = [0, 0];
+    let center = [39.9, -98.5];
     let zoom = 3;
     const locateOptions = {
         position: 'topleft',
@@ -66,7 +66,14 @@ const MapComponent = ({ trailsInfo, handleClick, isLoading, choices }) => {
                         className={classes.spinner}
                     />
                 ) : null}
-                <Map id="myMap" className={isLoading ? classes.mapLoading : ""} center={center} zoom={zoom} bounds={trailsInfo.bounds ? trailsInfo.bounds : null}>
+                <Map 
+                    id="myMap" 
+                    className={isLoading ? classes.mapLoading : ""} 
+                    center={center} 
+                    zoom={zoom} 
+                    bounds={trailsInfo.bounds ? trailsInfo.bounds : null}
+                    useFlyTo
+                >
                     <LayersControl position="topleft">
                         <BaseLayer checked name="openstreetmap">
                             <TileLayer

@@ -52,15 +52,15 @@ const FormSubComponent = ({ classes, value, variant, handleChange }) => {
             return (
                 <TextField
                     id="number"
-                    label="How much travel time do you have (60 minutes maximum)?"
+                    label="How much travel time do you have?"
                     name="SET_TIME"
                     value={value > 0 ? value : ""}
-                    error={value > 0 ? false : true}
+                    placeholder="enter between 0 and 60 minutes"
                     onChange={handleChange}
                     type="number"
                     className={classes.TextField}
                     InputLabelProps={{
-                        shrink: true,
+                        shrink: true
                     }}
                     inputProps={{
                         pattern: "[0-9]*"
