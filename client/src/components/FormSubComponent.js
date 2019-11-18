@@ -7,13 +7,13 @@ import {
     FormControlLabel,
     FormLabel,
     RadioGroup,
-    Radio,
     InputLabel,
     Select,
     MenuItem,
     TextField
 } from '@material-ui/core';
 
+import StyledRadio from './subComponents/StyledRadio';
 
 const FormSubComponent = ({ classes, value, variant, handleChange }) => {
 
@@ -22,10 +22,12 @@ const FormSubComponent = ({ classes, value, variant, handleChange }) => {
             return (
                 <FormControl component="fieldset" className={classes.formControl}>
                     <FormLabel component="legend">What Type of Trail are you Looking For?</FormLabel>
-                    <RadioGroup className={classes.radioGroup} aria-label="activities" name="SET_MODE" value={value} onChange={handleChange}>
-                        <FormControlLabel value="bike" control={<Radio />} label="Mountain Bike" />
-                        <FormControlLabel value="run" control={<Radio />} label="Trail Run" />
-                        <FormControlLabel value="hike" control={<Radio />} label="Hike" />
+                    <RadioGroup className={classes.radioGroup} aria-label="activities" name="SET_MODE" value={value} onChange={handleChange} row>
+                        <FormControlLabel value="bike" control={<StyledRadio />} label="Mountain Bike" />
+                        <FormControlLabel value="run" control={<StyledRadio />} label="Trail Run" />
+                        <FormControlLabel value="hike" control={<StyledRadio />} label="Hike" />
+                        <FormControlLabel value="ski" control={<StyledRadio />} label="Ski" />
+                        <FormControlLabel value="climb" control={<StyledRadio />} label="Climb" />
                     </RadioGroup>
                 </FormControl>
             );
