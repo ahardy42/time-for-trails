@@ -11,7 +11,7 @@ import {makeStyles} from '@material-ui/core/styles';
 import SwitchedContainer from '../containers/SwitchedContainer';
 import FormSubComponent from './FormSubComponent';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles( theme => ({
     root: {
         textAlign: "center",
         display: "flex",
@@ -40,13 +40,20 @@ const useStyles = makeStyles({
     formControl: {
         width: "100%"
     },
+    radioGroup: {
+        justifyContent: "space-around",
+        marginTop: "5px",
+        [theme.breakpoints.down('xs')]: {
+            flexDirection: "column"
+        }
+    },
     button: {
         width: "200px",
         maxWidth: "200px",
         margin: "1em",
         padding: "1em"
     }
-})
+}));
 
 const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabled}) => {
     const classes = useStyles();

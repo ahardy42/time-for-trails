@@ -10,7 +10,7 @@ const openRouteServiceKey = process.env.OPENROUTE_SERVICE_KEY;
 module.exports = async (lat, lng, body, profile) => {
 
     // collecting responses from outside apis
-    const trailRunProjectRes = await axios.get(`https://www.trailrunproject.com/data/get-trails?lat=${lat}&lon=${lng}&maxResults=500&sort=distance&key=${mtbProjectKey}`);
+    const trailRunProjectRes = await axios.get(`https://www.trailrunproject.com/data/get-trails?lat=${lat}&lon=${lng}&maxDistance=80&maxResults=500&sort=distance&key=${mtbProjectKey}`);
     const isoChroneRes = await axios.post('https://api.openrouteservice.org/v2/isochrones/' + profile,
         body,
         {

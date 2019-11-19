@@ -3,14 +3,14 @@ const utils = require('../utils');
 
 // keys
 require('dotenv').config();
-const mtbProjectKey = process.env.MTB_PROJECT_KEY;
+const mtnProjectKey = process.env.MOUNTAIN_PROJECT_KEY;
 const openRouteServiceKey = process.env.OPENROUTE_SERVICE_KEY;
 
 
 module.exports = async (lat, lng, body, profile) => {
 
     // collecting responses from outside apis
-    const hikingProjectRes = await axios.get(`https://www.hikingproject.com/data/get-trails?lat=${lat}&lon=${lng}&maxDistance=80&maxResults=500&sort=distance&key=${mtbProjectKey}`);
+    const mountainProjectRes = await axios.get(`https://www.mountainproject.com/data/get-routes-for-lat-lon?lat=${lat}&lon=${lng}&maxDistance=80&maxResults=500&key=${mtnProjectKey}`);
     const isoChroneRes = await axios.post('https://api.openrouteservice.org/v2/isochrones/' + profile,
         body,
         { 
@@ -22,19 +22,19 @@ module.exports = async (lat, lng, body, profile) => {
 
     const isoChronePolygonArray = isoChroneRes.data.features[0].geometry.coordinates[0]; // whew! returns the polygon lat/lng array 
     const isoChronePolygonArrayCopy = isoChroneRes.data.features[0].geometry.coordinates[0];
-
+    
     // reverse the array of lat/lngs
     const reversedArray = isoChronePolygonArrayCopy.map(element => {
         return element.reverse();
     })
 
     // using the utils to create a new array from the isochrone bounding polygon
-    const updatedHikingRes = hikingProjectRes.data.trails.filter(el => {
+    const updatedMountainRes = mountainProjectRes.data.routes.filter(el => {
         return utils.updateResponseArray(el, isoChronePolygonArray);
     });
 
     return {
-        trails: updatedHikingRes,
+        trails: updatedMountainRes,
         polygon: reversedArray
     };
 }
