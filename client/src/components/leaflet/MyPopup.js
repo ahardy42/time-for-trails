@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Popup } from 'react-leaflet';
 import { Rating } from '@material-ui/lab';
 
 const MyPopup = ({trail}) => {
+
+    const [windowDimensions, setDimensions] = useState({
+        height: 300,
+        width: 300
+    });
 
     const {name, imgSmall, url, summary, stars} = trail;
 
@@ -11,11 +16,22 @@ const MyPopup = ({trail}) => {
         return reg.exec(url);
     }
 
+    const dimensionSwitch = () => {
+        // switch ()
+    }
+
+    useEffect(() => {
+        setDimensions({
+            height: window.innerHeight,
+            width: window.innerWidth
+        });
+    }, [])
+
     return (
         <Popup 
             options={{
                 autoPan: true,
-                maxHeight: window.innerHeight * 0.3
+                // maxHeight: 25
             }}>
             <div className="popup-content">
                 <div>
