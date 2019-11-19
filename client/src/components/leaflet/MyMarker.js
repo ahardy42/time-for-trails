@@ -14,6 +14,8 @@ const MyMarker = ({ position, icon, markerColor, children }) => {
                 return "running";
             case "hike":
                 return "hiking";
+            case "ski":
+                return "skiing";
             default:
                 return;
         }

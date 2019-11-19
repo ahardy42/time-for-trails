@@ -27,7 +27,7 @@ const FormSubComponent = ({ classes, value, variant, handleChange }) => {
                         <FormControlLabel value="run" control={<StyledRadio />} label="Trail Run" />
                         <FormControlLabel value="hike" control={<StyledRadio />} label="Hike" />
                         <FormControlLabel value="ski" control={<StyledRadio />} label="Ski" />
-                        <FormControlLabel value="climb" control={<StyledRadio />} label="Climb" />
+                        {/* <FormControlLabel value="climb" control={<StyledRadio />} label="Climb" /> */}
                     </RadioGroup>
                 </FormControl>
             );

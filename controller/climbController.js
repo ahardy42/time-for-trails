@@ -1,6 +1,6 @@
 const services = require('../services');
 const { returnProfile } = require('../utils');
-const { hikeService } = services;
+const { climbService } = services;
 
 module.exports = async (req, res, next) => {
     // controller for sending back information to the router when the /api/trails/bike route is hit
@@ -8,7 +8,7 @@ module.exports = async (req, res, next) => {
     const body = { locations: [[parseFloat(lng), parseFloat(lat)]], range: [parseInt(time)] };
     const profile = returnProfile(mode)
     try {
-        const response = await hikeService(lat, lng, body, profile);
+        const response = await climbService(lat, lng, body, profile);
         res.send(response);
     } catch (e) {
         next(e);

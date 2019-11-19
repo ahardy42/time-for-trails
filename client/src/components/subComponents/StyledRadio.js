@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Radio } from '@material-ui/core';
 // icons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faBiking, faHiking, faRunning, faSkiing, faMountain } from '@fortawesome/free-solid-svg-icons'
+import { faBiking, faHiking, faRunning, faSkiing, faMountain } from '@fortawesome/free-solid-svg-icons';
 
 const useStyles = makeStyles({
     checked: {
