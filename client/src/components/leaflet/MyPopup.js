@@ -1,9 +1,10 @@
 import React from 'react';
 import { Popup } from 'react-leaflet';
+import { Rating } from '@material-ui/lab';
 
 const MyPopup = ({trail}) => {
 
-    const {name, imgSmall, url, summary} = trail;
+    const {name, imgSmall, url, summary, stars} = trail;
 
     const renderAttrText = url => {
         let reg = new RegExp('www.*.com');
@@ -17,7 +18,10 @@ const MyPopup = ({trail}) => {
                 maxHeight: window.innerHeight * 0.3
             }}>
             <div className="popup-content">
-                <h3>{name}</h3>
+                <div>
+                    <h3>{name}</h3>
+                    <Rating value={stars} size="small" readOnly />
+                </div>
                 <p>{summary}</p>
                 <br/>
                 {imgSmall.length ? <img src={imgSmall} alt='picture of the trail'/> : null}

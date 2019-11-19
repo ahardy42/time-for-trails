@@ -7,6 +7,9 @@ import {
     Link
 } from '@material-ui/core';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPaperPlane, faLink } from '@fortawesome/free-solid-svg-icons';
+
 const useStyles = makeStyles({
     root: {
         display: "flex",
@@ -34,7 +37,11 @@ const Footer = () => {
         <div className={classes.root}>
             <AppBar position="relative" className={classes.appBarFooter} component="footer">
                 <Typography className={classes.Typography} variant="h6">
-                    Andy Hardy | <Link color="inherit" href="https://www.ahardy42.com" target="_blank">Portfolio</Link>
+                    <Link color="inherit" href="mailto:aohardy@gmail.com?subject=time4trails?%20website%20comments" target="_blank" rel="noopener noreferrer">
+                        <FontAwesomeIcon icon={faPaperPlane} size="xs" /> Andy Hardy
+                    </Link> | <Link color="inherit" href="https://www.ahardy42.com" target="_blank" rel="noopener noreferrer">
+                        Portfolio <FontAwesomeIcon icon={faLink} size="xs" />
+                    </Link>
                 </Typography>
             </AppBar>
         </div>
