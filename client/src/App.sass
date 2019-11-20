@@ -1,7 +1,27 @@
 /* color vars */
 $navColor: rgb(56, 168, 50)
 $buttonColor: rgb(56, 168, 50)
+
+/* dead simple mixin */
+@mixin breakpoint($class) 
+    @if $class == xs 
+        @media screen and ( max-width: 599px )  {@content }
     
+    @if $class == sm 
+        @media screen and ( max-width: 959px )  {@content }
+    
+    @if $class == md 
+        @media screen and ( max-width: 1279px )  {@content }
+    
+    @if $class == lg 
+        @media screen and ( max-width: 1919px ) {@content } 
+    
+    @if $class == xl 
+        @media screen and ( min-width: 1920px )  {@content } 
+    
+
+    
+
 #root
     background: url(background.jpg) no-repeat center center fixed
     background-size: cover
@@ -11,6 +31,15 @@ $buttonColor: rgb(56, 168, 50)
 #myMap
     height: 100%
 
+.my-popup
+    @include breakpoint(xs) 
+        width: 250px
+        .leaflet-popup-content
+            height: 250px
+            overflow-y: scroll
+            a
+                text-align: center
+    
 .popup-content
     display: flex
     flex-direction: column

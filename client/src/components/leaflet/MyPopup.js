@@ -16,10 +16,6 @@ const MyPopup = ({trail}) => {
         return reg.exec(url);
     }
 
-    const dimensionSwitch = () => {
-        // switch ()
-    }
-
     useEffect(() => {
         setDimensions({
             height: window.innerHeight,
@@ -30,9 +26,10 @@ const MyPopup = ({trail}) => {
     return (
         <Popup 
             options={{
-                autoPan: true,
-                // maxHeight: 25
-            }}>
+                autoPan: true
+            }}
+            className="my-popup"
+        >
             <div className="popup-content">
                 <div>
                     <h3>{name}</h3>

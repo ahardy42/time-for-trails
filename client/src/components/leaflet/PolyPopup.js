@@ -11,7 +11,7 @@ const PolyPopup = ({ trailsNum, mode, timeLimit, travelType }) => {
     }, [trailsNum, mode, timeLimit, travelType]);
 
     return (
-        <Popup>
+        <Popup className="my-popup">
             <div className="polygon-popup">
                 <h3>What Does this Shape Mean?</h3>
                 <p>
