@@ -12,7 +12,7 @@ const SwitchedContainer = () => {
         searchValue: "",
         locations: [],
         isSkeleton: false,
-        outline: null // index value
+        outline: null, // index value
     }
 
     const switchReducer = (state, action) => {
@@ -50,7 +50,10 @@ const SwitchedContainer = () => {
                 let returnedLocations = await API.getCityName(state.searchValue);
                 dispatch({ type: "UPDATE_LOCATIONS", payload: returnedLocations });
             } catch (error) {
-                console.log(error);
+                // catching any errors and just re-setting the locations while changing
+                // global state to display the error message
+                dispatch({type: "RESET_LOCATIONS"});
+                globalDispatch({type: "SET_ERROR", payload: {type: "serverError", message: error.message}});
             }
         }, 3000);
         setTimer(wickyTrees); // setTimeout returns a number so this needs to be kept track of in the component's state

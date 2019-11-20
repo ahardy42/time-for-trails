@@ -5,9 +5,15 @@ export default {
         });
     },
     getTrails: async (mode, position, travelMode, timeLimitation) => {
-        const response = await fetch(`/api/trails/${mode}?lat=${position.lat}&lng=${position.lng}&mode=${travelMode}&time=${timeLimitation}`);
-        const json = await response.json();
-        return json;
+        try {
+            const response = await fetch(`/api/trails/${mode}?lat=${position.lat}&lng=${position.lng}&mode=${travelMode}&time=${timeLimitation}`);
+            if (!response.ok) throw new Error(response.statusText);
+            const json = await response.json();
+            return json;
+        } catch (error) {
+            // rethrow error to the getTrails catch block
+            throw error;
+        }
     },
     getPosition: locationObject => {
         return {
@@ -19,10 +25,16 @@ export default {
         return time * 60;
     },
     getCityName: async value => {
-        let params = value.split(" ").join("+");
-        const response = await fetch(`/api/location?q=${params}`);
-        const json = await response.json();
-        return json;
+        try {
+            let params = value.split(" ").join("+");
+            const response = await fetch(`/api/location?q=${params}`);
+            if (!response.ok) throw new Error(response.statusText);
+            const json = await response.json();
+            return json;
+        } catch (error) {
+            // rethrow the error to the component catch block
+            throw error;
+        }
     },
     getCityInfo: async id => {
         const response = await fetch(`/api/location?id=${id}`);
