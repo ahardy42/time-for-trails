@@ -21,8 +21,12 @@ export const choicesReducer = (state, action) => {
             return {...state, timeLimit: action.payload}
         case "SET_TYPE":
             return {...state, travelType: action.payload}
+        case "SET_ERROR":
+            return {...state, error: action.payload}
+        case "RESET_ERROR":
+            return {...state, error: {type: null, message: null}}
         case "RESET_CHOICES":
-            return {latLng: {}, mode: "", timeLimit: 0, travelType: ""}
+            return {latLng: {}, mode: "", timeLimit: 0, travelType: "", error: {type: null, message: null}}
         default:
             return state;
     }

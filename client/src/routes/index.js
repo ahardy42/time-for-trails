@@ -8,7 +8,7 @@ import NoPage from '../pages/NoPage';
 
 const RouteComponent = () => {
 
-    const initialState = { latLng: {}, mode: "", timeLimit: 0, travelType: "" };
+    const initialState = { latLng: {}, mode: "", timeLimit: 0, travelType: "", error: {type: null, message: null} };
 
     return (
         <StateProvider initialState={initialState} reducer={choicesReducer}>
