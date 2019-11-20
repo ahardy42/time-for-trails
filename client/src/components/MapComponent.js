@@ -7,6 +7,7 @@ import MyMarker from './leaflet/MyMarker';
 import MyPopup from './leaflet/MyPopup';
 import PolyPopup from './leaflet/PolyPopup';
 import LocateControl from './LocateControl';
+import LocationError from './Modals/LocationError';
 
 const { Overlay, BaseLayer } = LayersControl;
 
@@ -42,7 +43,7 @@ const useStyles = makeStyles( theme => ({
     }
 }));
 
-const MapComponent = ({ trailsInfo, handleClick, isLoading, choices }) => {
+const MapComponent = ({ trailsInfo, handleClick, isLoading, choices, goToFairbanks, locationError, handleClose, message }) => {
 
     let center = [39.9, -98.5];
     let zoom = 3;
@@ -56,66 +57,75 @@ const MapComponent = ({ trailsInfo, handleClick, isLoading, choices }) => {
     const classes = useStyles();
 
     return (
-        <Grid container justify="center" alignContent="center" className={classes.root}>
-            <Paper elevation={2} className={classes.Paper}>
-                {isLoading ? (
-                    <CircularProgress 
-                        color="secondary"
-                        size={200}
-                        thickness={5}
-                        className={classes.spinner}
-                    />
-                ) : null}
-                <Map 
-                    id="myMap" 
-                    className={isLoading ? classes.mapLoading : ""} 
-                    center={center} 
-                    zoom={zoom} 
-                    bounds={trailsInfo.bounds ? trailsInfo.bounds : null}
-                    useFlyTo
-                >
-                    <LayersControl position="topleft">
-                        <BaseLayer checked name="openstreetmap">
-                            <TileLayer
-                                attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-                                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                            />
-                        </BaseLayer>
-                        <Overlay name="travel limit" checked={true}>
-                            <Polygon positions={trailsInfo.polygon || []} color="#38a832">
-                                <PolyPopup 
-                                    trailsNum={trailsInfo.trails.length} 
-                                    mode={choices.mode} 
-                                    timeLimit={choices.timeLimit} 
-                                    travelType={choices.travelType}
+        <>
+            <Grid container justify="center" alignContent="center" className={classes.root}>
+                <Paper elevation={2} className={classes.Paper}>
+                    {isLoading ? (
+                        <CircularProgress 
+                            color="secondary"
+                            size={200}
+                            thickness={5}
+                            className={classes.spinner}
+                        />
+                    ) : null}
+                    <Map 
+                        id="myMap" 
+                        className={isLoading ? classes.mapLoading : ""} 
+                        center={center} 
+                        zoom={zoom} 
+                        bounds={trailsInfo.bounds ? trailsInfo.bounds : null}
+                        useFlyTo
+                    >
+                        <LayersControl position="topleft">
+                            <BaseLayer checked name="openstreetmap">
+                                <TileLayer
+                                    attribution='&amp;copy <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+                                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                                 />
-                            </Polygon>
-                        </Overlay>
-                        <Overlay name="trails nearby" checked={true}>
-                            <LayerGroup>
-                                {/* mapping the trails markers */}
-                                {trailsInfo.trails.map((trail, index) => {
-                                    return (
-                                        <MyMarker 
-                                            key={index} 
-                                            position={[trail.latitude, trail.longitude]}
-                                            icon={choices.mode}
-                                            markerColor={trail.difficulty}
-                                        >
-                                            <MyPopup trail={trail} />
-                                        </MyMarker>
-                                    )
-                                })}
-                            </LayerGroup>
-                        </Overlay>
-                    </LayersControl>
-                    <LocateControl options={locateOptions} />
-                </Map>
-                <Fab color="primary" className={classes.Fab} onClick={handleClick}>
-                    <Home />
-                </Fab>
-            </Paper>
-        </Grid>
+                            </BaseLayer>
+                            <Overlay name="travel limit" checked={true}>
+                                <Polygon positions={trailsInfo.polygon || []} color="#38a832">
+                                    <PolyPopup 
+                                        trailsNum={trailsInfo.trails.length} 
+                                        mode={choices.mode} 
+                                        timeLimit={choices.timeLimit} 
+                                        travelType={choices.travelType}
+                                    />
+                                </Polygon>
+                            </Overlay>
+                            <Overlay name="trails nearby" checked={true}>
+                                <LayerGroup>
+                                    {/* mapping the trails markers */}
+                                    {trailsInfo.trails.map((trail, index) => {
+                                        return (
+                                            <MyMarker 
+                                                key={index} 
+                                                position={[trail.latitude, trail.longitude]}
+                                                icon={choices.mode}
+                                                markerColor={trail.difficulty}
+                                            >
+                                                <MyPopup trail={trail} />
+                                            </MyMarker>
+                                        )
+                                    })}
+                                </LayerGroup>
+                            </Overlay>
+                        </LayersControl>
+                        <LocateControl options={locateOptions} />
+                    </Map>
+                    <Fab color="primary" className={classes.Fab} onClick={handleClick}>
+                        <Home />
+                    </Fab>
+                </Paper>
+            </Grid>
+            <LocationError
+                isOpen={locationError}
+                goHome={handleClick}
+                goToFairbanks={goToFairbanks}
+                handleClose={handleClose}
+                message={message}
+            />
+        </>
     );
 }
 
