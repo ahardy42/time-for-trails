@@ -35,10 +35,5 @@ export default {
             // rethrow the error to the component catch block
             throw error;
         }
-    },
-    getCityInfo: async id => {
-        const response = await fetch(`/api/location?id=${id}`);
-        const json = await response.json();
-        return json;
     }
 }

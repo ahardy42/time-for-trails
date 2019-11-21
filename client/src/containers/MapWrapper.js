@@ -47,6 +47,7 @@ const MapWrapper = () => {
     }
 
     const goToFairbanks = event => {
+        dispatch({type: "SET_ISLOCATIONSEARCH", payload: true});
         dispatch({type: "SET_LATLNG", payload: {lat: 64.837845, lng: -147.716675}});
         handleClose();
     }
@@ -56,7 +57,7 @@ const MapWrapper = () => {
         let {mode, travelType, timeLimit, latLng} = state;
         let realTime = API.getTimeLimit(timeLimit);
 
-        if ("lat" in latLng) {
+        if (state.isLocationSearch) {
 
             let position = latLng;
 

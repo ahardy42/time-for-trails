@@ -4,7 +4,8 @@ import {
     Paper, 
     Typography, 
     Container, 
-    Grid
+    Grid,
+    Collapse
 } from '@material-ui/core';
 import {makeStyles} from '@material-ui/core/styles';
 // component import
@@ -55,7 +56,7 @@ const useStyles = makeStyles( theme => ({
     }
 }));
 
-const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabled}) => {
+const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabled, isLocationSearch}) => {
     const classes = useStyles();
 
     return(
@@ -86,14 +87,16 @@ const Form = ({mode, travelType, timeLimit, handleChange, handleSubmit, isDisabl
             </Grid>
             <Grid container justify="center">
                 <Paper elevation={2} className={classes.Paper}>
-                    <SwitchedContainer />
+                    <SwitchedContainer isDisabled={isDisabled} />
                 </Paper>
             </Grid>
-            <Grid container justify="center">
-                <Button variant="contained" className={classes.button} disabled={isDisabled} onClick={handleSubmit}>
-                    {isDisabled ? "Please Fill Out All Form Fields" : "Let's Find Some Trails Near You!"}
-                </Button>
-            </Grid>
+            <Collapse in={!isLocationSearch}>
+                <Grid container justify="center">
+                    <Button variant="contained" className={classes.button} disabled={isDisabled} onClick={handleSubmit}>
+                        {isDisabled ? "Please Fill Out All Form Fields" : "Let's Find Some Trails Near You!"}
+                    </Button>
+                </Grid>
+            </Collapse>
 
         </Container>
     );

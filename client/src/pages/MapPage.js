@@ -7,9 +7,9 @@ import { useChoicesValue } from '../context/ChoicesContext';
 
 const MapPage = () => {
 
-    const [context] = useChoicesValue();
+    const [{mode}] = useChoicesValue();
 
-    if (context.mode === "") {
+    if (mode === "") {
         return <Redirect to="/" />
     }
 
