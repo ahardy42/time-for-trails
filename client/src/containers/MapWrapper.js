@@ -47,6 +47,7 @@ const MapWrapper = () => {
     }
 
     const goToFairbanks = event => {
+        dispatch({type: "SET_ISLOCATIONSEARCH", payload: true});
         dispatch({type: "SET_LATLNG", payload: {lat: 64.837845, lng: -147.716675}});
         handleClose();
     }

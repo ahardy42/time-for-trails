@@ -19,6 +19,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faSearchLocation } from '@fortawesome/free-solid-svg-icons';
 import { Skeleton } from '@material-ui/lab';
 import { makeStyles } from '@material-ui/styles';
+import {prettyName} from '../../utils/prettyName';
 
 const useStyles = makeStyles({
     outline: {
@@ -71,12 +72,12 @@ const SwitchedField = ({ handleChange, searchVal, isSkeleton, locations, setChec
                             <ListItem><Skeleton variant="rect" height={50} width="100%" /></ListItem>
                         ) : (
                                 locations.map((location, index) => {
+                                    let {primary, secondary} = prettyName(location);
                                     return (
                                         <ListItem
-                                            button
                                             key={index}
                                         >
-                                            <ListItemText primary={location.display_name} secondary={location.type} />
+                                            <ListItemText primary={primary} secondary={secondary} />
                                             <Hidden xsDown>
                                                 <Button
                                                     variant="contained"

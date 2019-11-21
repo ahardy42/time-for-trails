@@ -37,7 +37,7 @@ const FormWrapper = () => {
     // effect hook to check if the button should be disabled
     useEffect(() => {
         let {mode, travelType, timeLimit} = state;
-        if (mode === "" || travelType === "" || timeLimit === 0) {
+        if (mode === "" || travelType === "" || (timeLimit === 0 || timeLimit === "")) {
             setIsDisabled(true)
         } else {
             setIsDisabled(false)
