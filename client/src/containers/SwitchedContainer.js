@@ -1,32 +1,27 @@
 import React, { useReducer, useEffect, useState } from 'react';
-import SwitchedField from '../components/SwitchedField';
+import {useHistory} from 'react-router-dom';
+import SwitchedField from '../components/subComponents/SwitchedField';
 import API from '../utils/API';
 import { useChoicesValue } from '../context/ChoicesContext';
 
-const SwitchedContainer = () => {
+const SwitchedContainer = ({isDisabled}) => {
 
     const [timer, setTimer] = useState(0); // just to keep track of the setTimeout variable... 
 
     const initialState = {
-        isChecked: false,
         searchValue: "",
         locations: [],
-        isSkeleton: false,
-        outline: null, // index value
+        isSkeleton: false
     }
 
     const switchReducer = (state, action) => {
         switch (action.type) {
-            case "SWITCH_CHECKED":
-                return { ...state, isChecked: !state.isChecked };
             case "UPDATE_LOCATIONS":
                 return { ...state, locations: action.payload, isSkeleton: false };
             case "RESET_LOCATIONS":
-                return { ...state, locations: [], isSkeleton: true, outline: null };
+                return { ...state, locations: [], isSkeleton: true };
             case "UPDATE_SEARCHVALUE":
                 return { ...state, searchValue: action.payload };
-            case "UPDATE_OUTLINE":
-                return { ...state, outline: action.payload };
             case "RESET_STATE":
                 return { initialState };
             default:
@@ -37,7 +32,9 @@ const SwitchedContainer = () => {
     // state management!
     const [state, dispatch] = useReducer(switchReducer, initialState);
 
-    const [, globalDispatch] = useChoicesValue(); // global state modifier
+    const [{isLocationSearch}, globalDispatch] = useChoicesValue(); // global state modifier
+
+    const history = useHistory();
 
     // helper functions!
     // when searchVal changes start a timer that will search nominatum API to list possible locations
@@ -67,17 +64,13 @@ const SwitchedContainer = () => {
         dispatch({ type: "UPDATE_SEARCHVALUE", payload: value });
     }
 
-    const setChecked = event => {
-        if (state.isChecked) {
-            dispatch({ type: "RESET_LOCATIONS" });
-        }
-        dispatch({ type: "SWITCH_CHECKED" });
+    const handleSubmit = latLng => {
+        globalDispatch({ type: "SET_LATLNG", payload: latLng });
+        history.push("/map");
     }
 
-    const setLatLng = (index, latLng) => {
-        dispatch({ type: "UPDATE_OUTLINE", payload: index });
-        globalDispatch({ type: "SET_LATLNG", payload: latLng });
-    }
+    const setIsLocationSearch = () => globalDispatch({ type: "SET_ISLOCATIONSEARCH", payload: !isLocationSearch });
+
 
     // useEffect hooks!
     // only start / stop the timer when the searchValue is updated (not when the event fires)
@@ -97,10 +90,11 @@ const SwitchedContainer = () => {
             handleChange={handleChange}
             searchVal={state.searchValue}
             locations={state.locations}
-            checked={state.isChecked}
-            setChecked={setChecked}
-            setLatLng={setLatLng}
+            checked={isLocationSearch}
+            setChecked={setIsLocationSearch}
+            handleSubmit={handleSubmit}
             outline={state.outline}
+            isDisabled={isDisabled}
         />
     );
 }

@@ -54,6 +54,7 @@ const FormWrapper = () => {
             handleChange={handleChange}
             handleSubmit={handleSubmit}
             isDisabled={isDisabled}
+            isLocationSearch={state.isLocationSearch}
         />
     );
 

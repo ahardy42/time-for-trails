@@ -56,7 +56,7 @@ const MapWrapper = () => {
         let {mode, travelType, timeLimit, latLng} = state;
         let realTime = API.getTimeLimit(timeLimit);
 
-        if ("lat" in latLng) {
+        if (state.isLocationSearch) {
 
             let position = latLng;
 
