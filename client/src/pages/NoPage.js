@@ -34,7 +34,7 @@ const EntryPage = ({history}) => {
             <Container className={classes.root}>
                 <Paper className={classes.Paper}>
                     <Typography variant="h3">Sorry, you have wandered off the path!</Typography>
-                    <Link to="/" component={Link1}>Head Home</Link>
+                    <Link to="/" component={Link1}>Head Away!</Link>
                 </Paper>
             </Container>
             <Footer />
