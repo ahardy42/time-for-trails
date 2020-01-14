@@ -33,7 +33,7 @@ const EntryPage = ({history}) => {
             <NavBar history={history}/>
             <Container className={classes.root}>
                 <Paper className={classes.Paper}>
-                    <Typography variant="h3">Sorry, you have wandered off the path!</Typography>
+                    <Typography variant="h3">Where did you go?</Typography>
                     <Link to="/" component={Link1}>Head Home</Link>
                 </Paper>
             </Container>
