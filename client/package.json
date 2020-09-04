@@ -12,7 +12,7 @@
     "@material-ui/lab": "^4.0.0-alpha.30",
     "leaflet": "^1.5.1",
     "leaflet.awesome-markers": "^2.0.5",
-    "node-sass": "^4.13.0",
+    "node-sass": "^4.13.1",
     "react": "^16.11.0",
     "react-dev-utils": "^9.1.0",
     "react-dom": "^16.11.0",
