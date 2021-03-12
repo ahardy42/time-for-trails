@@ -14,7 +14,7 @@
     "leaflet.awesome-markers": "^2.0.5",
     "node-sass": "^4.13.0",
     "react": "^16.11.0",
-    "react-dev-utils": "^9.1.0",
+    "react-dev-utils": "^11.0.4",
     "react-dom": "^16.11.0",
     "react-leaflet": "^2.5.0",
     "react-leaflet-locate-control": "^0.1.6",
